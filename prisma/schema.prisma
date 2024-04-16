@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator json {
+  provider  = "prisma-json-types-generator"
+  namespace = "PrismaJson"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model A {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  nested B
+}
+
+type B {
+  /// [CustomJson]
+  myJsonValue Json
+}
